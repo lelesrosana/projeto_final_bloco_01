@@ -2,9 +2,21 @@ package Menu;
 
 import java.util.Scanner;
 
+import Menu.model.Item_Menu;
+import Menu.model.Service;
+
 public class Menu {
 	public static void main(String[] args) {
 		Scanner read = new Scanner(System.in);
+
+		// teste da Classe Item_Manu
+
+		// Item_Menu test = new Item_Menu ("Luciana da Cruz", "Amélia da Cruz", 30,
+		// "45855229231", "11254147645", "Rua Das Flores");
+
+		// Service test01 = new Service ("Giovanna da Cruz", "Luciana da Cruz", 7,
+		// "1234567892",
+		// "14578523654", "Rua das Flores");
 
 		int option;
 
@@ -36,14 +48,17 @@ public class Menu {
 
 			switch (option) {
 			case 1:
-				// clearScreen();
 				System.out.println("Gerar cadastro:");
+				//
+
 				break;
 			case 2:
 				System.out.println("Listar todos os agendamentos:");
+				// test.setViewRegistration();
 				break;
 			case 3:
 				System.out.println("Buscar cadastro:");
+				//test01.cadastro(read.nextLine());
 				break;
 			case 4:
 				System.out.println("Atualizar dados:");
@@ -76,13 +91,12 @@ public class Menu {
 		System.out.println(".....................................................");
 		System.out.println("                                                     ");
 		System.out.println("                                                     ");
-		}
+	}
 
 	public static void clearScreen() {
 		for (int i = 0; i < 50; i++) {
 			System.out.println("");
 		}
-		
-		
+
 	}
 }
