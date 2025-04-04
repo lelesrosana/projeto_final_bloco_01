@@ -19,4 +19,5 @@ public interface Repository {
 
 	public void register(String consultation, int number); // asssindando o metod de operações
 
+
 }

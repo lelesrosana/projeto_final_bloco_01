@@ -1,12 +1,15 @@
 package Menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Menu.controller.Controller;
 import Menu.model.Item_Menu;
 import Menu.model.Service;
 
 public class Menu {
 	public static void main(String[] args) {
+		Controller Item = new Controller();
 		Scanner read = new Scanner(System.in);
 
 		// teste da Classe Item_Manu
@@ -38,8 +41,18 @@ public class Menu {
 		System.out.println(".         Entre com a opção desejada:               .");
 		System.out.println(".....................................................");
 
+		
+		try {
 		option = read.nextInt();
+		}catch (InputMismatchException e) {
+			System.out.println("Digite valores inteiros!");
+			read.nextLine();
+			option = 0;
 
+		}
+		
+		
+		
 		do {
 			clearScreen();
 			System.out.println(
@@ -54,11 +67,13 @@ public class Menu {
 				break;
 			case 2:
 				System.out.println("Listar todos os agendamentos:");
-				// test.setViewRegistration();
+				System.out.println("");
+				Item.procura(null);
+				KeyPress();
 				break;
 			case 3:
 				System.out.println("Buscar cadastro:");
-				//test01.cadastro(read.nextLine());
+				System.out.println("");
 				break;
 			case 4:
 				System.out.println("Atualizar dados:");
@@ -79,6 +94,11 @@ public class Menu {
 			option = read.nextInt();
 		} while (option != 7);
 
+	}
+
+	private static void KeyPress() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public static void about() {
