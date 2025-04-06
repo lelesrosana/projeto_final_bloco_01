@@ -2,6 +2,7 @@ package Menu.controller;
 
 import Menu.model.Item_Menu;
 import Menu.repository.Repository;
+import Menu.util.Cores;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,8 @@ public class Controller implements Repository {
 		if (found != null) {
 			found.setViewRegistration();
 		} else {
-			System.out.println("\nCadastro com CPF " + cpf + " não encontrado.");
+			System.out.println(Cores.TEXT_RED + Cores.ANSI_WHITE_BACKGROUND + "\nCadastro com CPF " + cpf
+					+ " não encontrado." + Cores.TEXT_RESET);
 		}
 	}
 
@@ -35,7 +37,8 @@ public class Controller implements Repository {
 	@Override
 	public void listAll() {
 		if (registrationList.isEmpty()) {
-			System.out.println("\nNenhum cadastro encontrado.");
+			System.out.println(
+					Cores.TEXT_RED + Cores.ANSI_WHITE_BACKGROUND + "\nNenhum cadastro encontrado." + Cores.TEXT_RESET);
 		} else {
 			for (Item_Menu item : registrationList) {
 				item.setViewRegistration();
@@ -51,7 +54,8 @@ public class Controller implements Repository {
 			registrationList.set(index, updateRegistration);
 			System.out.println("\nCadastro atualizado com sucesso!");
 		} else {
-			System.out.println("\nNão foi possível atualizar: CPF não encontrado.");
+			System.out.println(Cores.TEXT_RED + Cores.ANSI_WHITE_BACKGROUND
+					+ "\nNão foi possível atualizar: CPF não encontrado." + Cores.TEXT_RESET);
 		}
 	}
 
@@ -60,9 +64,10 @@ public class Controller implements Repository {
 		Item_Menu existente = buscarNaCollection(cpf);
 		if (existente != null) {
 			registrationList.remove(existente);
-			System.out.println("\nCadastro com CPF " + cpf + " removido com sucesso.");
+			System.out.println(
+					Cores.TEXT_GREEN + "\nCadastro com CPF " + cpf + " removido com sucesso." + Cores.TEXT_RESET);
 		} else {
-			System.out.println("\nCadastro com CPF " + cpf + " não encontrado.");
+			System.out.println(Cores.TEXT_RED + Cores.ANSI_WHITE_BACKGROUND + "\nCadastro com CPF " + cpf + " não encontrado." + Cores.TEXT_RESET);
 		}
 	}
 
@@ -72,12 +77,14 @@ public class Controller implements Repository {
 		System.out.println("Avaliando se o cadastro existe: ");
 		int passoword = 0;
 		if (existente != null) {
-			System.out.println("\n\nCadastro encontrado!");
+			System.out.println(Cores.TEXT_GREEN + "\n\nCadastro encontrado!" + Cores.TEXT_RESET);
 			passoword = registrationList.size();
-			System.out.println("\n\nSua senha é: " + (passoword++) + "\nPor favor, aguarde ser chamado.");
-			//registerOrdenation.add(existente);
+			System.out.println(Cores.TEXT_GREEN + "\n\nSua senha é: " + (passoword++)
+					+ "\nPor favor, aguarde ser chamado." + Cores.TEXT_RESET);
+			// registerOrdenation.add(existente);
 		} else {
-			System.out.println("\n\nCadastro não encontrado! Realize o cadastramento.");
+			System.out.println(
+					Cores.TEXT_RED + Cores.ANSI_WHITE_BACKGROUND + "\n\nCadastro não encontrado! Realize o cadastramento." + Cores.TEXT_RESET);
 		}
 	}
 

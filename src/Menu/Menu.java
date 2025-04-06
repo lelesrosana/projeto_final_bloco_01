@@ -35,7 +35,8 @@ public class Menu {
 			System.out.println("...................................................................");
 			System.out.println(".                                                                 .");
 			System.out.println(".Escolha uma opção:                                               .");
-			System.out.println(".                                                                 ." + Cores.TEXT_RESET);
+			System.out
+					.println(".                                                                 ." + Cores.TEXT_RESET);
 
 			try {
 				option = read.nextInt();
@@ -45,6 +46,8 @@ public class Menu {
 				read.nextLine();
 				option = 0;
 			}
+
+			clearScreen();
 
 			switch (option) {
 			case 1:
@@ -102,7 +105,8 @@ public class Menu {
 					Item_Menu atualizado = new Item_Menu(userName, motherName, userAge, cpf, phoneNumber, address);
 					controller.toUpdate(cpf, atualizado);
 				} else {
-					System.out.println("\n\nCPF não encontrado.");
+					System.out.println(Cores.TEXT_RED + Cores.ANSI_WHITE_BACKGROUND + "\n\nCPF não encontrado."
+							+ Cores.TEXT_RESET);
 				}
 				KeyPress(read);
 				break;
@@ -126,7 +130,8 @@ public class Menu {
 				break;
 
 			default:
-				System.out.println("\n\nOpção inválida!");
+				System.out.println(
+						Cores.TEXT_RED + Cores.ANSI_WHITE_BACKGROUND + "\n\nOpção inválida!" + Cores.TEXT_RESET);
 				KeyPress(read);
 				break;
 			}
