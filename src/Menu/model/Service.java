@@ -20,6 +20,9 @@ public class Service extends Item_Menu {
 		this.consultation = confere;
 	}
 
+	
+	
+	/*
 	public boolean register(String consultation) {
 		System.out.println("Avaliar se a consulta existe: ");
 		consultation = read.nextLine(); // Captura a entrada do usuário
@@ -32,5 +35,7 @@ public class Service extends Item_Menu {
 			return false;
 		}
 	}
+	
+	*/
 
 }

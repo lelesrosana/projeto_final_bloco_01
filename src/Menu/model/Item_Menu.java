@@ -1,6 +1,8 @@
 package Menu.model;
 
-public abstract class Item_Menu {
+import Menu.util.Cores;
+
+public  class Item_Menu {
 
 	private String userName;
 	private String motherName;
@@ -67,15 +69,17 @@ public abstract class Item_Menu {
 
 	public void setViewRegistration() {
 
-		System.out.println("\n\n" + ".....................................................");
-		System.out.println(".         Dados da conta:                           .");
-		System.out.println(".....................................................");
+		System.out.println("\n\n" + Cores.TEXT_BLACK + Cores.ANSI_WHITE_BACKGROUND  +
+						   "................................................................");
+		System.out.println(".         Dados da conta:                                      .");
+		System.out.println("................................................................");
 		System.out.println("Nome do usuário: " + this.userName);
 		System.out.println("Nome da mãe: " + this.motherName);
 		System.out.println("Idade: " + this.userAge);
 		System.out.println("CPF: " + this.cpf);
 		System.out.println("Número de telefone: " + this.phoneNumber);
 		System.out.println("Endereço: " + this.address);
+		System.out.println("................................................................." + Cores.TEXT_RESET);
 
 	}
 }

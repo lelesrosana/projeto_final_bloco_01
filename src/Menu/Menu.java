@@ -2,121 +2,158 @@ package Menu;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import Menu.controller.Controller;
 import Menu.model.Item_Menu;
-import Menu.model.Service;
+import Menu.util.Cores;
 
 public class Menu {
+	private static final Item_Menu String = null;
+
 	public static void main(String[] args) {
-		Controller Item = new Controller();
+		Controller controller = new Controller();
 		Scanner read = new Scanner(System.in);
 
-		// teste da Classe Item_Manu
+		String userName, motherName, cpf = null, phoneNumber, address;
+		int userAge, option;
 
-		// Item_Menu test = new Item_Menu ("Luciana da Cruz", "Amélia da Cruz", 30,
-		// "45855229231", "11254147645", "Rua Das Flores");
-
-		// Service test01 = new Service ("Giovanna da Cruz", "Luciana da Cruz", 7,
-		// "1234567892",
-		// "14578523654", "Rua das Flores");
-
-		int option;
-
-		System.out.println(".....................................................");
-		System.out.println(".                                                   .");
-		System.out.println(".                Sistema Unico de Saúde             .");
-		System.out.println(".                                                   .");
-		System.out.println(".....................................................");
-		System.out.println(".                                                   .");
-		System.out.println(".         1 - Gerar cadastro                        .");
-		System.out.println(".         2 - Listar todos os agendamentos          .");
-		System.out.println(".         3 - Buscar cadastro                       .");
-		System.out.println(".         4 - Atualizar dados                       .");
-		System.out.println(".         5 - Apagar cadastro                       .");
-		System.out.println(".         6 - Agendar consulta                      .");
-		System.out.println(".         7 - Finalizar atendimento                 .");
-		System.out.println(".                                                   .");
-		System.out.println(".....................................................");
-		System.out.println(".         Entre com a opção desejada:               .");
-		System.out.println(".....................................................");
-
-		
-		try {
-		option = read.nextInt();
-		}catch (InputMismatchException e) {
-			System.out.println("Digite valores inteiros!");
-			read.nextLine();
-			option = 0;
-
-		}
-		
-		
-		
 		do {
 			clearScreen();
-			System.out.println(
-					"        Bem vindo ao Sistema Único de Saúde" + "\n        Se cuidar é sempre a melhor opção!\n\n");
-			about();
+			System.out.println(Cores.TEXT_BLUE_BOLD + Cores.ANSI_WHITE_BACKGROUND
+
+					+ "...................................................................");
+			System.out.println(".                                                                 .");
+			System.out.println(".                     Sistema Unico de Saúde                      .");
+			System.out.println(".                                                                 .");
+			System.out.println("...................................................................");
+			System.out.println(".                    1 - Gerar cadastro                           .");
+			System.out.println(".                    2 - Listar todos os cadastros                .");
+			System.out.println(".                    3 - Buscar cadastro                          .");
+			System.out.println(".                    4 - Atualizar dados                          .");
+			System.out.println(".                    5 - Apagar cadastro                          .");
+			System.out.println(".                    6 - Agendar consulta                         .");
+			System.out.println(".                    7 - Sair                                     .");
+			System.out.println("...................................................................");
+			System.out.println(".                                                                 .");
+			System.out.println(".Escolha uma opção:                                               .");
+			System.out.println(".                                                                 ." + Cores.TEXT_RESET);
+
+			try {
+				option = read.nextInt();
+				read.nextLine(); // limpar buffer
+			} catch (InputMismatchException e) {
+				System.out.println("Digite apenas números inteiros!");
+				read.nextLine();
+				option = 0;
+			}
 
 			switch (option) {
 			case 1:
-				System.out.println("Gerar cadastro:");
-				//
+				System.out.print("Digite o CPF: ");
+				cpf = read.nextLine();
+				if (controller.buscarNaCollection(cpf) != null) {
+					System.out.println("Cadastro já existe.");
+				} else {
+					System.out.print("Nome do Titular: ");
+					userName = read.nextLine();
+					System.out.print("Idade: ");
+					userAge = read.nextInt();
+					read.nextLine();
+					System.out.print("Nome da Mãe: ");
+					motherName = read.nextLine();
+					System.out.print("Número de telefone: ");
+					phoneNumber = read.nextLine();
+					System.out.print("Endereço: ");
+					address = read.nextLine();
 
+					Item_Menu novo = new Item_Menu(userName, motherName, userAge, cpf, phoneNumber, address);
+					controller.register(novo);
+				}
+				KeyPress(read);
 				break;
+
 			case 2:
-				System.out.println("Listar todos os agendamentos:");
-				System.out.println("");
-				Item.procura(null);
-				KeyPress();
+				controller.listAll();
+				KeyPress(read);
 				break;
+
 			case 3:
-				System.out.println("Buscar cadastro:");
-				System.out.println("");
+				System.out.print("Informe o CPF: ");
+				cpf = read.nextLine();
+				controller.quest(cpf);
+				KeyPress(read);
 				break;
+
 			case 4:
-				System.out.println("Atualizar dados:");
+				System.out.print("\n\nInforme o CPF para atualizar: ");
+				cpf = read.nextLine();
+				if (controller.buscarNaCollection(cpf) != null) {
+					System.out.print("Novo Nome: ");
+					userName = read.nextLine();
+					System.out.print("Nova Idade: ");
+					userAge = read.nextInt();
+					read.nextLine();
+					System.out.print("Nome da Mãe: ");
+					motherName = read.nextLine();
+					System.out.print("Número de telefone: ");
+					phoneNumber = read.nextLine();
+					System.out.print("Endereço: ");
+					address = read.nextLine();
+
+					Item_Menu atualizado = new Item_Menu(userName, motherName, userAge, cpf, phoneNumber, address);
+					controller.toUpdate(cpf, atualizado);
+				} else {
+					System.out.println("\n\nCPF não encontrado.");
+				}
+				KeyPress(read);
 				break;
+
 			case 5:
-				System.out.println("Apagar cadastro:");
+				System.out.print("\n\nInforme o CPF para deletar: ");
+				cpf = read.nextLine();
+				controller.delet(cpf);
+				KeyPress(read);
 				break;
+
 			case 6:
-				System.out.println("Agendar consulta:");
+				System.out.print("\n\nInforme o CPF para agendar consulta: ");
+				cpf = read.nextLine();
+				controller.register(cpf);
+				KeyPress(read);
 				break;
+
 			case 7:
-				System.out.println("Atendimento finalizado.");
+				System.out.println("\n\nEncerrando o programa.");
 				break;
+
 			default:
-				System.out.println("Opção inválida! Tente novamente: ");
+				System.out.println("\n\nOpção inválida!");
+				KeyPress(read);
 				break;
 			}
-			option = read.nextInt();
+
 		} while (option != 7);
-
+		clearScreen();
+		System.out.println("\n\nAtendimento finalizado.\n\n\n");
+		read.close();
+		sobre();
 	}
 
-	private static void KeyPress() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void about() {
-		System.out.println(".....................................................");
-		System.out.println(".                                                   .");
-		System.out.println(".  Projeto desenvolvido por: Rosana C. L. Ferreira  .");
-		System.out.println(".     E-mail: lelesrosana@gmail.com                 .");
-		System.out.println(".     GitHub: https://github.com/lelesrosana        .");
-		System.out.println(".                                                   .");
-		System.out.println(".....................................................");
-		System.out.println("                                                     ");
-		System.out.println("                                                     ");
+	public static void KeyPress(Scanner read) {
+		System.out.println("\nPressione Enter para continuar.");
+		read.nextLine();
 	}
 
 	public static void clearScreen() {
-		for (int i = 0; i < 50; i++) {
-			System.out.println("");
-		}
+		for (int i = 0; i < 50; i++)
+			System.out.println();
+	}
 
+	public static void sobre() {
+		System.out.println(Cores.TEXT_PURPLE + Cores.ANSI_WHITE_BACKGROUND
+				+ "...................................................................");
+		System.out.println(".  Projeto Desenvolvido por:                                      .");
+		System.out.println(".  Rosana da Cruz Leles Ferreira                                  .");
+		System.out.println(".  https://github.com/lelesrosana / E-mail: lelesrosana@gmail.com .");
+		System.out.println("...................................................................");
 	}
 }
